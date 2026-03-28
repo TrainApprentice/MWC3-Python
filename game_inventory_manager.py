@@ -57,36 +57,42 @@ class GameItem:
     def get_title(self) -> str:
         """Get the item title."""
         return self._title
+
     def set_title(self, title):
         self._title = title
     
     def get_publisher(self) -> str:
         """Get the item publisher."""
         return self._publisher
+    
     def set_publisher(self, publisher):
         self._publisher = publisher
 
     def get_platform(self) -> str:
         """Get the item platform."""
         return self._platform
+    
     def set_platform(self, platform):
         self._platform = platform
 
     def get_msrp(self) -> float:
         """Get the item MSRP."""
         return self._msrp
+    
     def set_msrp(self, msrp):
         self._msrp = msrp
 
     def get_price(self) -> str:
         """Get the item price."""
         return self._price
+    
     def set_price(self, price):
         self._price = price
 
     def get_store_id(self) -> str:
         """Get the item store ID."""
         return self._store_id
+
     def set_store_id(self, store_id):
         self._store_id = store_id
     
