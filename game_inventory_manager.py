@@ -1,8 +1,5 @@
 import csv
-from abc import ABC, abstractmethod
-from datetime import date, timedelta
-from enum import Enum
-from typing import Optional
+
 
 # ============================================================================
 # CUSTOM EXCEPTIONS
@@ -20,6 +17,9 @@ class ItemNotFoundError(Exception):
     """Raised when an item cannot be found."""
     pass
 
+# ============================================================================
+# CLASSES
+# ============================================================================
 
 class GameItem:
     """
@@ -35,7 +35,9 @@ class GameItem:
         store_id: ID of store game is at
     """
     
-    def __init__(self, title: str, publisher: str, platform: str, msrp: float, price: float, condition: str, store_id: int) -> None:
+    def __init__(self, title: str, publisher: str, platform: str, 
+                 msrp: float, price: float, condition: str, 
+                 store_id: int) -> None:
         """
         Initialize a new game item.
         
@@ -46,7 +48,7 @@ class GameItem:
             msrp: Manufacturer price for game
             price: Price point of game
             condition: Current condition of game
-            store_id: ID of store game is at
+            store_id: ID of store game is located
         """
 
         self._title = title
@@ -59,43 +61,49 @@ class GameItem:
 
     # Properties for encapsulation
     
-    
+    # Get and Set functions for Title
     def get_title(self) -> str:
         """Get the item title."""
         return self._title
     def set_title(self, title:str):
         self._title = title
     
+    # Get and Set functions for Publisher
     def get_publisher(self) -> str:
         """Get the item publisher."""
         return self._publisher
     def set_publisher(self, publisher:str):
         self._publisher = publisher
 
+    # Get and Set functions for Platform
     def get_platform(self) -> str:
         """Get the item platform."""
         return self._platform
     def set_platform(self, platform:str):
         self._platform = platform
 
+    # Get and Set functions for MSRP
     def get_msrp(self) -> float:
         """Get the item MSRP."""
         return self._msrp
     def set_msrp(self, msrp:float):
         self._msrp = msrp
 
+    # Get and Set functions for Price
     def get_price(self) -> str:
         """Get the item price."""
         return self._price
     def set_price(self, price:int):
         self._price = price
 
+    # Get and Set functions for Condition
     def get_condition(self) -> str:
         """Get the item condition."""
         return self._condition
     def set_condition(self, condition:str):
         self._condition = condition
 
+    # Get and Set functions for Store ID
     def get_store_id(self) -> str:
         """Get the item store ID."""
         return self._store_id
@@ -113,12 +121,7 @@ class GameDatabaseManager:
     """
     
     def __init__(self) -> None:
-        """
-        Initialize a new library.
-        
-        Args:
-            name: The library's name
-        """
+        """Initialize a new game database."""
         self.pullFromFile()
 
     
@@ -156,19 +159,36 @@ class GameDatabaseManager:
         
 
         for i in self._inventory:
-            if i.get_title() == title and i.get_condition() == condition and i.get_store_id() == store_id:
+            if i.get_title() == title and i.get_condition() == condition and \
+            i.get_store_id() == store_id:
                 self._inventory.remove(i)
                 not_found = False
+                self.rewriteInventoryFile()
                 return i
+
 
         if not_found:
             raise ItemNotFoundError
     
     def find_item(self, title:str, condition: str, store_id: int) -> GameItem:
+        """Find a specific item in the inventory.
         
+        Args:
+            title: Title of item to find
+            condition: Condition of item to find
+            store_id: Store ID of item to find
+            
+        Returns:
+            The found item
+             
+        Raises:
+            ItemNotFoundError: If item doesn't exist
+        
+        """
         foundItem:GameItem = None
         for i in self._inventory:
-            if i.get_title() == title and i.get_condition() == condition and i.get_store_id() == store_id:
+            if i.get_title() == title and i.get_condition() == condition and \
+            i.get_store_id() == store_id:
                 foundItem = i
         
         if foundItem is not None:
@@ -178,17 +198,27 @@ class GameDatabaseManager:
 
     
     def pullFromFile(self):
+        """Pulls data from file into inventory."""
         self._inventory = []
         with open("database/game_database_data.csv", newline="") as csvfile:
             fileReader = csv.DictReader(csvfile)
             for row in fileReader:
-                setItem = GameItem(str(row['Title']), str(row['Publisher']), str(row['Platform']), float(row['MSRP']), float(row['PurchasePrice']), str(row['Condition']), int(row['StoreID']))
+                setItem = GameItem(str(row['Title']), str(row['Publisher']), 
+                                    str(row['Platform']), float(row['MSRP']), 
+                                    float(row['PurchasePrice']), str(row['Condition']), 
+                                    int(row['StoreID']))
                 self.add_item(setItem)
                 
 
     def addItemToInventory(self, item: GameItem):
+        """Adds item into the inventory and updates the file.
+        
+        Args: 
+            item: The item to add
+        """
         with open("database/game_database_data.csv", 'w', newline="") as csvfile:
-            fieldNames = ['Title', 'Publisher', 'Platform', 'MSRP', 'PurchasePrice', 'Condition', 'StoreID']
+            fieldNames = ['Title', 'Publisher', 'Platform', 'MSRP', 
+                          'PurchasePrice', 'Condition', 'StoreID']
             writer = csv.DictWriter(csvfile, fieldnames=fieldNames)
             writer.writeheader()
             for i in self.inventory:
@@ -215,8 +245,10 @@ class GameDatabaseManager:
         self.add_item(item)
     
     def rewriteInventoryFile(self):
+        """Rewrites the file after an item is removed."""
         with open("database/game_database_data.csv", 'w', newline="") as csvfile:
-            fieldNames = ['Title', 'Publisher', 'Platform', 'MSRP', 'PurchasePrice', 'Condition', 'StoreID']
+            fieldNames = ['Title', 'Publisher', 'Platform', 'MSRP', 
+                          'PurchasePrice', 'Condition', 'StoreID']
             writer = csv.DictWriter(csvfile, fieldnames=fieldNames)
             writer.writeheader()
             for i in self.inventory:

@@ -10,8 +10,6 @@ print("3 - Remove Game")
 
 choice = int(input())
 
-choice = int(input())
-
 match choice:
 
     case 1:

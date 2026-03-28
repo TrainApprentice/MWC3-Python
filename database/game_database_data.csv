@@ -1,3 +1,4 @@
 Title,Publisher,Platform,MSRP,PurchasePrice,Condition,StoreID
-Pokopia,Omega Force,Nintendo Switch 2,69.99,69.99,New,000001
-Harvest Moon 64,Natsume Inc.,Nintendo 64,59.99,25.00,Good,000002
+Pokopia,Omega Force,Nintendo Switch 2,69.99,69.99,New,1
+Harvest Moon 64,Natsume Inc.,Nintendo 64,59.99,25.0,Good,2
+Test Game,Test Publish,Test Platform,1.0,1.0,New,1000

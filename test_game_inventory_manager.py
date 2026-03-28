@@ -10,14 +10,14 @@ class TestGameItem(unittest.TestCase):
 
     def setUp(self):
         """Create a sample game object"""
-        self.game = GameItem("Test Game", "Test Publish", "Test Platform", "Test MSRP", "Test Price", "New", 1000)
+        self.game = GameItem("Test Game", "Test Publish", "Test Platform", 10.00, 10.00, "New", 1000)
 
     def test_game_init(self):
         self.assertEqual(self.game.get_title(), "Test Game")
         self.assertEqual(self.game.get_publisher(), "Test Publish")
         self.assertEqual(self.game.get_platform(), "Test Platform")
-        self.assertEqual(self.game.get_msrp(), "Test MSRP")
-        self.assertEqual(self.game.get_price(), "Test Price")
+        self.assertEqual(self.game.get_msrp(), 10.00)
+        self.assertEqual(self.game.get_price(), 10.00)
         self.assertEqual(self.game.get_condition(), "New")
         self.assertEqual(self.game.get_store_id(), 1000)
 
@@ -25,16 +25,16 @@ class TestGameItem(unittest.TestCase):
         self.game.set_title("New Name")
         self.game.set_publisher("New Publish")
         self.game.set_platform("New Platform")
-        self.game.set_msrp("New MSRP")
-        self.game.set_price("New Price")
+        self.game.set_msrp(15.00)
+        self.game.set_price(15.00)
         self.game.set_condition("Used")
         self.game.set_store_id(2000)
 
         self.assertEqual(self.game.get_title(), "New Game")
         self.assertEqual(self.game.get_publisher(), "New Publish")
         self.assertEqual(self.game.get_platform(), "New Platform")
-        self.assertEqual(self.game.get_msrp(), "New MSRP")
-        self.assertEqual(self.game.get_price(), "New Price")
+        self.assertEqual(self.game.get_msrp(), 15.00)
+        self.assertEqual(self.game.get_price(), 15.00)
         self.assertEqual(self.game.get_condition(), "Used")
         self.assertEqual(self.game.get_store_id(), 2000)
 
@@ -44,7 +44,7 @@ class TestGameDatabaseManager(unittest.TestCase):
     def setUp(self):
         """Setup a Game Database"""
         self.data = GameDatabaseManager()
-        self.game = GameItem("Test Game", "Test Publish", "Test Platform", "Test MSRP", "Test Price", "New", 1000)
+        self.game = GameItem("Test Game", "Test Publish", "Test Platform", 10.00, 10.00, "New", 1000)
 
     def test_game_database_manager_init(self):
         """Test Database Initialization"""
@@ -68,7 +68,7 @@ class TestGameDatabaseManager(unittest.TestCase):
         """Database should find item"""
         self.data.add_item(self.game)
 
-        item = self.data.find_item("Test Game", Condition.NEW, 1000)
+        item = self.data.find_item("Test Game", "New", 1000)
         self.assertEqual(item, self.game)
 
     def test_remove_item(self):
