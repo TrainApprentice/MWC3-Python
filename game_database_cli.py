@@ -82,12 +82,52 @@ match choice:
                 y = input().lower()
 
                 if y == "y":
-                    GameDatabaseManager.fing_item(title, condition, store_id)
-
+                    item = GameDatabaseManager.find_item(title, condition, store_id)
+                    print(f"{item.get_title}, {item.get_publisher}, {item.get_platform}, {item.get_msrp}, {item.get_price}, {item.get_condition}, {item.get_store_id}")
 
             case 3:
                 print("Edit Item")
                 print("~~~~~~~~~~~~")
+                print("Title:")
+                title = input()
+                print("Condition:")
+                condition = input()
+                print("StoreID:")
+                store_id = input()
+
+                y = "n"
+                print("View Item: {condition} {title} at Store {store_id}?")
+                y = input().lower()
+
+                if y == "y":
+                    item = GameDatabaseManager.find_item(title, condition, store_id)
+                    print(f"{item.get_title}, {item.get_publisher}, {item.get_platform}, {item.get_msrp}, {item.get_price}, {item.get_condition}, {item.get_store_id}")
+
+                quit = False
+
+                var = 0
+
+                print("Edit Item - {item.get_title}")
+                print("~~~~~~~~~~~~")
+                print("1. Title")
+                print("2. Publisher")
+                print("3. Platform")
+                print("4. MSRP")
+                print("5. Price")
+                print("6. StoreID")
+                
+                var = int(input())
+
+                match var:
+
+                    case 1:
+                        new = str(input())
+                        item.set_
+                    case 1:
+                    case 1:
+                    case 1:
+                    case 1:
+                    case 1:
 
             case 4:
                 print("Remove Item")
