@@ -122,14 +122,32 @@ match choice:
 
                     case 1:
                         new = str(input())
-                        item.set_
-                    case 1:
-                    case 1:
-                    case 1:
-                    case 1:
-                    case 1:
+                        item.set_title(new)
+                    case 2:
+                        new = str(input())
+                        item.set_publisher(new)
+                    case 3:
+                        new = str(input())
+                        item.set_platform(new)
+                    case 4:
+                        new = float(input())
+                        item.set_msrp(new)
+                    case 5:
+                        new = float(input())
+                        item.set_price(new)
+                    case 6:
+                        new = int(input())
+                        item.set_store_id(new)
+                
 
             case 4:
                 print("Remove Item")
                 print("~~~~~~~~~~~~")
+                print("Title:")
+                title = input()
+                print("Condition:")
+                condition = input()
+                print("StoreID:")
+                store_id = input()
+
 
