@@ -70,3 +70,7 @@ class TestGameDatabaseManager(unittest.TestCase):
 
         item = self.data.find_item("Test Game", Condition.NEW, 1000)
         self.assertEqual(item, self.game)
+
+    def test_remove_item(self):
+        """Database should find item without removing it"""
+        
