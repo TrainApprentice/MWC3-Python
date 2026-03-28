@@ -1,4 +1,4 @@
-from game_inventory_manager import GameDatabaseManager, GameItem
+from game_inventory_manager import GameDatabaseManager, GameItem, Condition
 
 game = GameItem("Test Game", "Test Publish", "Test Platform", "Test MSRP", "Test Price", Condition.NEW, 1000)
 
