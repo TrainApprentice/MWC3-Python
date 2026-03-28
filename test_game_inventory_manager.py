@@ -10,7 +10,7 @@ class TestGameItem(unittest.TestCase):
 
     def setUp(self):
         """Create a sample game object"""
-        self.game = GameItem("Test Game", "Test Publish", "Test Platform", 20.00, 20.00, "Condition.NEW", 1000)
+        self.game = GameItem("Test Game", "Test Publish", "Test Platform", 20.00, 20.00, "New", 1000)
 
     def test_game_init(self):
         self.assertEqual(self.game.get_title(), "Test Game")
@@ -22,11 +22,11 @@ class TestGameItem(unittest.TestCase):
         self.assertEqual(self.game.get_store_id(), 1000)
 
     def test_game_setters(self):
-        self.game.set_title("New Name")
+        self.game.set_title("New Game")
         self.game.set_publisher("New Publish")
         self.game.set_platform("New Platform")
-        self.game.set_msrp("New MSRP")
-        self.game.set_price("New Price")
+        self.game.set_msrp(10.00)
+        self.game.set_price(10.00)
         self.game.set_condition("Used")
         self.game.set_store_id(2000)
 
@@ -48,27 +48,27 @@ class TestGameDatabaseManager(unittest.TestCase):
 
     def test_game_database_manager_init(self):
         """Test Database Initialization"""
-        self.assertEqual(len(self.data.inventory), 0)
+        self.assertEqual(len(self.data.inventory), 2) # 2 items in Test File
 
     def test_database_add_item(self):
         """Database should add items to inventory"""
         self.data.add_item(self.game)
 
-        self.assertEqual(len(self.data.inventory), 1)
+        self.assertEqual(len(self.data.inventory), 3)
 
     def test_remove_item(self):
         """Database should remove items from inventory"""
         self.data.add_item(self.game)
-        self.assertEqual(len(self.data.inventory), 1)
+        self.assertEqual(len(self.data.inventory), 3)
         
-        self.data.remove_item(self.game)
-        self.assertEqual(len(self.data.inventory), 0)
+        self.data.remove_item(self.game.get_title(), self.game.get_condition(), self.game.get_store_id())
+        self.assertEqual(len(self.data.inventory), 2)
 
     def test_find_item(self):
         """Database should find item"""
         self.data.add_item(self.game)
 
-        item = self.data.find_item("Test Game", "Condition.NEW", 1000)
+        item = self.data.find_item("Test Game", "New", 1000)
         self.assertEqual(item, self.game)
 
 class TestCLI(unittest.TestCase):
