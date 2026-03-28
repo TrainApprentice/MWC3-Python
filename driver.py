@@ -2,13 +2,13 @@ from game_inventory_manager import GameDatabaseManager, GameItem
 
 game = GameItem("Test Game", "Test Publish", "Test Platform", 1.00, 1.00, "New", 1000)
 
-
 choice = 0
-
 
 print("1 - Database Files")
 print("2 - Add Item")
 print("3 - Remove Game")
+
+choice = int(input())
 
 choice = int(input())
 

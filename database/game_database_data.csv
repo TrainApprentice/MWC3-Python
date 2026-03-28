@@ -1,7 +1,3 @@
 Title,Publisher,Platform,MSRP,PurchasePrice,Condition,StoreID
-Kirby Air Riders,Nintendo,Gamecube,49.99,39.99,Good,3
-Kirby Air Riders,Nintendo,Gamecube,49.99,39.99,Good,3
-Pokopia,Omega Force,Nintendo Switch 2,69.99,69.99,New,1
-Harvest Moon 64,Natsume Inc.,Nintendo 64,59.99,25.0,Good,2
-Kirby Air Riders,Nintendo,Gamecube,49.99,39.99,Good,3
-Test Game,Test Publish,Test Platform,1.00,1.00,New,1000
+Pokopia,Omega Force,Nintendo Switch 2,69.99,69.99,New,000001
+Harvest Moon 64,Natsume Inc.,Nintendo 64,59.99,25.00,Good,000002
